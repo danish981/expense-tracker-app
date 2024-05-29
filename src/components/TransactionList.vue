@@ -8,7 +8,7 @@
       :key="transaction.id"
       :class="transaction.amount < 0 ? 'minus' : 'plus'"
     >
-      {{ transaction.text }} <span>-$ {{ transaction.amount.toFixed(2)  }} </span
+      {{ transaction.text }} <span>-$ {{ parseFloat(transaction.amount).toFixed(2)  }} </span
       ><button class="delete-btn">x</button>
     </li>
 

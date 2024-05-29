@@ -24,14 +24,29 @@
 
 <script setup>
 import { ref } from "vue";
+import { useToast } from "vue-toastification";
 
 const text = ref("");
 const amount = ref("");
 
-const onSubmit = () => {
-  // validate the data
-  // use vue toastification package to show errors and success messages
+const emit = defineEmits(["transactionSubmitted"]);
 
-  console.log(text.value, amount.value);
+const toast = useToast(); // toast initialized for the use
+
+const onSubmit = () => {
+  if (!text.value || !amount.value) {
+    toast.error("Both the fields are necessary to be filled");
+    return;
+  }
+
+  const transactionData = {
+    text: text.value,
+    amount: parseFloat(amount.value).toFixed(2),
+  };
+
+  emit("transactionSubmitted", transactionData);
+
+  text.value = "";
+  amount.value = "";
 };
 </script>
