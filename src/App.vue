@@ -1,7 +1,7 @@
 <template>
   <Header />
   <div class="container">
-    <Balance />
+    <Balance :total="total" />
     <IncomeExpenses />
     <!-- passing the transactions array to the component as props from this App.vue parent component to the TransactionList child component -->
     <TransactionList :transactions="transactions" />
@@ -18,7 +18,7 @@ import IncomeExpenses from "./components/IncomeExpenses.vue";
 import TransactionList from "./components/TransactionList.vue";
 import AddTransaction from "./components/AddTransaction.vue";
 
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 // todo : we want this array to be reactive
 const transactions = ref([
@@ -37,4 +37,10 @@ const transactions = ref([
   { id: 13, text: "TV", amount: 800 },
   { id: 14, text: "Vacation", amount: -2000 },
 ]);
+
+const total = computed(() => {
+  return transactions.value.reduce((acc, transaction) => {
+    return acc + transaction.amount;
+  }, 0);
+});
 </script>
