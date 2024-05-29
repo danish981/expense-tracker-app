@@ -21,13 +21,19 @@ import IncomeExpenses from "./components/IncomeExpenses.vue";
 import TransactionList from "./components/TransactionList.vue";
 import AddTransaction from "./components/AddTransaction.vue";
 
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useToast } from "vue-toastification";
 
 const toast = useToast();
 
 // todo : we want this array to be reactive
 const transactions = ref([]);
+
+
+onMounted(() => {
+  transactions.value = JSON.parse(localStorage.getItem("transactions")) || [];
+});
+
 
 // total
 const total = computed(() => {
@@ -63,6 +69,7 @@ const handleTransactionSubmitted = (transactionData) => {
   });
 
   toast.success("Transaction added successfully!");
+  saveTransactionsToLocalStoreage();
 };
 
 // generate unique random id
@@ -77,5 +84,13 @@ const deleteTransaction = (id) => {
   );
 
   toast.success("Transaction deleted successfully!");
+  saveTransactionsToLocalStoreage()
 };
+
+
+const saveTransactionsToLocalStoreage = () => {
+  localStorage.setItem("transactions", JSON.stringify(transactions.value));
+};
+
+
 </script>
