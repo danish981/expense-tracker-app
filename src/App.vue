@@ -4,7 +4,10 @@
     <Balance :total="total" />
     <IncomeExpenses :income="+income" :expense="+expense" />
     <!-- passing the transactions array to the component as props from this App.vue parent component to the TransactionList child component -->
-    <TransactionList :transactions="transactions" />
+    <TransactionList
+      :transactions="transactions"
+      @transactionDeleted="deleteTransaction"
+    />
     <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
   </div>
 </template>
@@ -24,11 +27,7 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 
 // todo : we want this array to be reactive
-const transactions = ref([
-  { id: 1, text: "Flower", amount: -20 },
-  { id: 2, text: "Salary", amount: 300 },
-  { id: 3, text: "Book", amount: -10 },
-]);
+const transactions = ref([]);
 
 // total
 const total = computed(() => {
@@ -69,5 +68,14 @@ const handleTransactionSubmitted = (transactionData) => {
 // generate unique random id
 const generateUniqueRandomId = () => {
   return Math.floor(Math.random() * 1000000000);
+};
+
+// delete transaction
+const deleteTransaction = (id) => {
+  transactions.value = transactions.value.filter(
+    (transaction) => transaction.id !== id
+  );
+
+  toast.success("Transaction deleted successfully!");
 };
 </script>
