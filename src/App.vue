@@ -2,7 +2,7 @@
   <Header />
   <div class="container">
     <Balance :total="total" />
-    <IncomeExpenses />
+    <IncomeExpenses :income="income" :expense="expense" />
     <!-- passing the transactions array to the component as props from this App.vue parent component to the TransactionList child component -->
     <TransactionList :transactions="transactions" />
     <AddTransaction />
@@ -25,22 +25,32 @@ const transactions = ref([
   { id: 1, text: "Flower", amount: -20 },
   { id: 2, text: "Salary", amount: 300 },
   { id: 3, text: "Book", amount: -10 },
-  { id: 4, text: "Camera", amount: 150 },
-  { id: 5, text: "Phone", amount: 200 },
-  { id: 6, text: "Rent", amount: -800 },
-  { id: 7, text: "Laptop", amount: 1200 },
-  { id: 8, text: "Food", amount: -50 },
-  { id: 9, text: "Guitar", amount: 250 },
-  { id: 10, text: "Car", amount: 10000 },
-  { id: 11, text: "Bike", amount: 500 },
-  { id: 12, text: "Shoes", amount: -30 },
-  { id: 13, text: "TV", amount: 800 },
-  { id: 14, text: "Vacation", amount: -2000 },
 ]);
 
+// total
 const total = computed(() => {
   return transactions.value.reduce((acc, transaction) => {
     return acc + transaction.amount;
   }, 0);
+});
+
+// income
+const income = computed(() => {
+  return transactions.value
+    .filter((transaction) => transaction.amount > 0)
+    .reduce((acc, transaction) => {
+      return acc + transaction.amount;
+    }, 0)
+    .toFixed(2);
+});
+
+// expenses
+const expense = computed(() => {
+  return transactions.value
+    .filter((transaction) => transaction.amount < 0)
+    .reduce((acc, transaction) => {
+      return acc + transaction.amount;
+    }, 0)
+    .toFixed(2);
 });
 </script>
