@@ -4,7 +4,8 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and
+disable Vetur).
 
 ## Customize configuration
 
@@ -28,7 +29,13 @@ npm run dev
 npm run build
 ```
 
-### Video at current time
+**Pull requests are strongly welcome to optimize the validate the code**
 
+### below are the needed changes
 
-https://youtu.be/hNPwdOZ3qFU?t=3550
+- validate the data
+- show precised error messages
+- use pinia / redux
+- use a third party API when app mounts to render some dummy data
+- make pages and add vue router
+
