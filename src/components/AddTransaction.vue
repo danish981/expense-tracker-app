@@ -14,4 +14,5 @@
     </div>
     <button class="btn">Add transaction</button>
   </form>
+
 </template>
