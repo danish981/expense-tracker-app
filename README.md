@@ -31,4 +31,4 @@ npm run build
 ### Video at current time
 
 
-https://youtu.be/hNPwdOZ3qFU?t=1450
+https://youtu.be/hNPwdOZ3qFU?t=1599

@@ -3,7 +3,7 @@
   <ul id="list" class="list">
     <!-- a unique key has to be defined when rendering lists or data with v-for -->
     <!-- and instead of v-bind:key we can use :key attribute, its short and cleaner -->
-    <li v-for="transaction in transactions" :key="transaction.id">
+    <li v-for="transaction in transactions" :key="transaction.id" :class="transaction.amount < 0 ? 'minus' : 'plus'">
       {{ transaction.text }} <span>-$ {{ transaction.amount }} </span
       ><button class="delete-btn">x</button>
     </li>
